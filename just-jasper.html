@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Jasper — Character Reference</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1410;
+    --ink-light: #4a3f35;
+    --ink-muted: #7a6e64;
+    --parchment: #f5f0e8;
+    --parchment-dark: #ede5d0;
+    --border: #c8b89a;
+    --border-dark: #a09070;
+    --gold: #8b6914;
+    --gold-light: #c49a28;
+    --fire: #c44b1a;
+    --serif: 'Crimson Text', Georgia, serif;
+    --display: 'IM Fell English', 'Palatino Linotype', serif;
+  }
+
+  body {
+    font-family: var(--serif);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--parchment);
+    padding: 0.5in;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    border-bottom: 2px solid var(--border-dark);
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.8rem;
+  }
+  .header h1 {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: normal;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .header .aka {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-muted);
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .header .tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .tag {
+    font-size: 11px;
+    border: 0.5px solid var(--border-dark);
+    padding: 1px 8px;
+    color: var(--ink-muted);
+    background: var(--parchment-dark);
+  }
+
+  /* ── Layout ── */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+  .full-width { grid-column: 1 / -1; }
+  .two-col { grid-column: span 2; }
+
+  /* ── Sections ── */
+  .section {
+    border: 0.5px solid var(--border);
+    background: var(--parchment-dark);
+    padding: 0.5rem 0.6rem;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 0.5px solid var(--border);
+    padding-bottom: 3px;
+    margin-bottom: 6px;
+  }
+
+  /* ── Stat blocks ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  .stat-box {
+    text-align: center;
+    border: 0.5px solid var(--border);
+    background: var(--parchment);
+    padding: 4px 2px;
+  }
+  .stat-name { font-size: 9px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-score { font-size: 20px; font-family: var(--display); font-weight: normal; color: var(--ink); line-height: 1.1; }
+  .stat-mod { font-size: 11px; color: var(--ink-muted); }
+
+  /* ── Derived stats ── */
+  .derived-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  .derived-box {
+    text-align: center;
+    border: 0.5px solid var(--border);
+    background: var(--parchment);
+    padding: 3px;
+  }
+  .derived-label { font-size: 9px; color: var(--ink-muted); text-transform: uppercase; }
+  .derived-val { font-size: 16px; font-family: var(--display); font-weight: normal; }
+  .derived-calc { font-size: 9px; color: var(--ink-muted); }
+
+  /* ── Tables / rows ── */
+  .data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 2px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 12px;
+    gap: 8px;
+  }
+  .data-row:last-child { border-bottom: none; }
+  .data-key { color: var(--ink); flex-shrink: 0; }
+  .data-val { color: var(--ink-muted); font-style: italic; text-align: right; font-size: 11px; }
+
+  /* ── Spell cards ── */
+  .spell-block {
+    border-bottom: 0.5px solid var(--border);
+    padding: 4px 0;
+  }
+  .spell-block:last-child { border-bottom: none; }
+  .spell-header { display: flex; justify-content: space-between; align-items: baseline; }
+  .spell-name { font-family: var(--display); font-size: 13px; color: var(--ink); }
+  .spell-level { font-size: 10px; color: var(--gold); }
+  .spell-meta { font-size: 10px; color: var(--ink-muted); margin: 1px 0; }
+  .spell-desc { font-size: 11px; color: var(--ink-light); line-height: 1.4; }
+  .spell-reskin {
+    font-size: 10px;
+    color: var(--fire);
+    font-style: italic;
+    border-left: 2px solid var(--gold-light);
+    padding-left: 5px;
+    margin-top: 2px;
+  }
+
+  /* ── RP / combat sections ── */
+  .rp-block { margin-bottom: 6px; }
+  .rp-block:last-child { margin-bottom: 0; }
+  .rp-label {
+    font-family: var(--display);
+    font-size: 11px;
+    color: var(--gold);
+    margin-bottom: 1px;
+  }
+  .rp-text { font-size: 11px; color: var(--ink-light); line-height: 1.45; }
+
+  .priority-item { display: flex; gap: 6px; margin-bottom: 5px; }
+  .priority-item:last-child { margin-bottom: 0; }
+  .priority-num {
+    font-family: var(--display);
+    font-size: 16px;
+    color: var(--gold);
+    line-height: 1;
+    min-width: 14px;
+  }
+  .priority-title { font-size: 11px; font-weight: 600; color: var(--ink); }
+  .priority-desc { font-size: 10px; color: var(--ink-muted); line-height: 1.4; }
+
+  /* ── Trait boxes ── */
+  .trait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .trait-box {
+    border: 0.5px solid var(--border);
+    background: var(--parchment);
+    padding: 4px 6px;
+  }
+  .trait-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 2px; }
+  .trait-text { font-size: 11px; color: var(--ink-light); line-height: 1.4; font-style: italic; }
+
+  /* ── Cantrip rows ── */
+  .cantrip-row {
+    display: flex;
+    gap: 8px;
+    padding: 2px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 11px;
+    align-items: baseline;
+  }
+  .cantrip-row:last-child { border-bottom: none; }
+  .cantrip-name { font-family: var(--display); min-width: 110px; font-size: 12px; }
+  .cantrip-reskin { color: var(--fire); font-style: italic; font-size: 10px; }
+
+  /* ── Warning box ── */
+  .warn-box {
+    border: 1px solid var(--gold);
+    background: var(--parchment);
+    padding: 5px 8px;
+    margin-top: 4px;
+  }
+  .warn-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 3px; }
+  .warn-item { font-size: 10px; color: var(--ink-light); padding: 1px 0; }
+  .warn-item::before { content: "⚠ "; color: var(--gold); }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    margin-top: 0.6rem;
+    font-size: 10px;
+    color: var(--ink-muted);
+    font-style: italic;
+    border-top: 0.5px solid var(--border);
+    padding-top: 4px;
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { padding: 0.4in; background: white; }
+    .section { break-inside: avoid; }
+    .spell-block { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Just Jasper</h1>
+  <div class="aka">Tim Anders &nbsp;·&nbsp; formerly The Great Andrini &nbsp;·&nbsp; companion to Goldmaximus the Gold, Ancient Dragon of the Golden Flame, He Who Is Also Quite Gold</div>
+  <div class="tags">
+    <span class="tag">Wild Magic Sorcerer 5</span>
+    <span class="tag">Charlatan</span>
+    <span class="tag">Custom Lineage</span>
+    <span class="tag">War Caster</span>
+    <span class="tag">Yellow cat eyes</span>
+    <span class="tag">Proficiency +3</span>
+    <span class="tag">Spell Save DC 15</span>
+    <span class="tag">Spell Attack +7</span>
+  </div>
+</div>
+
+<!-- Row 1: Stats + Derived + Skills -->
+<div class="body-grid">
+
+  <div class="section">
+    <div class="section-title">Ability Scores</div>
+    <div class="stat-row">
+      <div class="stat-box"><div class="stat-name">STR</div><div class="stat-score">10</div><div class="stat-mod">+0</div></div>
+      <div class="stat-box"><div class="stat-name">DEX</div><div class="stat-score">14</div><div class="stat-mod">+2</div></div>
+      <div class="stat-box"><div class="stat-name">CON</div><div class="stat-score">15</div><div class="stat-mod">+2</div></div>
+      <div class="stat-box"><div class="stat-name">INT</div><div class="stat-score">10</div><div class="stat-mod">+0</div></div>
+      <div class="stat-box"><div class="stat-name">WIS</div><div class="stat-score">13</div><div class="stat-mod">+1</div></div>
+      <div class="stat-box"><div class="stat-name">CHA</div><div class="stat-score">18</div><div class="stat-mod">+4</div></div>
+    </div>
+    <div class="derived-grid">
+      <div class="derived-box"><div class="derived-label">HP</div><div class="derived-val">38</div><div class="derived-calc">8+4d6+CON×5</div></div>
+      <div class="derived-box"><div class="derived-label">AC</div><div class="derived-val">12</div><div class="derived-calc">10+DEX</div></div>
+      <div class="derived-box"><div class="derived-label">Initiative</div><div class="derived-val">+2</div><div class="derived-calc">DEX mod</div></div>
+    </div>
+    <div class="derived-grid">
+      <div class="derived-box"><div class="derived-label">Sorcery Pts</div><div class="derived-val">5</div><div class="derived-calc">= level</div></div>
+      <div class="derived-box"><div class="derived-label">1st slots</div><div class="derived-val">4</div></div>
+      <div class="derived-box"><div class="derived-label">2nd slots</div><div class="derived-val">3</div></div>
+    </div>
+    <div class="derived-grid">
+      <div class="derived-box"><div class="derived-label">3rd slots</div><div class="derived-val">2</div></div>
+      <div class="derived-box"><div class="derived-label">Save DC</div><div class="derived-val">15</div><div class="derived-calc">8+3+4</div></div>
+      <div class="derived-box"><div class="derived-label">Spell Atk</div><div class="derived-val">+7</div><div class="derived-calc">3+4</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Skills &amp; Proficiencies</div>
+    <div class="data-row"><span class="data-key">Arcana</span><span class="data-val">+3 (INT+prof)</span></div>
+    <div class="data-row"><span class="data-key">Deception</span><span class="data-val">+7 (CHA+prof) — ask DM re: expertise</span></div>
+    <div class="data-row"><span class="data-key">Sleight of Hand</span><span class="data-val">+5 (DEX+prof)</span></div>
+    <div class="data-row"><span class="data-key">Disguise Kit</span><span class="data-val">Tool proficiency</span></div>
+    <div class="data-row"><span class="data-key">Forgery Kit</span><span class="data-val">Tool proficiency</span></div>
+    <div style="margin-top:8px">
+      <div class="section-title">All Skills</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap: 0 8px; font-size:11px;">
+        <div class="data-row"><span class="data-key">Acrobatics (DEX)</span><span class="data-val">+2</span></div>
+        <div class="data-row"><span class="data-key">Animal Handling (WIS)</span><span class="data-val">+1</span></div>
+        <div class="data-row"><span class="data-key">Arcana (INT) ✓</span><span class="data-val">+3</span></div>
+        <div class="data-row"><span class="data-key">Athletics (STR)</span><span class="data-val">+0</span></div>
+        <div class="data-row"><span class="data-key" style="color:var(--gold)">Deception (CHA) ✓✓</span><span class="data-val" style="color:var(--gold)">+7 / +10*</span></div>
+        <div class="data-row"><span class="data-key">History (INT)</span><span class="data-val">+0</span></div>
+        <div class="data-row"><span class="data-key">Insight (WIS)</span><span class="data-val">+1</span></div>
+        <div class="data-row"><span class="data-key">Intimidation (CHA)</span><span class="data-val">+4</span></div>
+        <div class="data-row"><span class="data-key">Investigation (INT)</span><span class="data-val">+0</span></div>
+        <div class="data-row"><span class="data-key">Medicine (WIS)</span><span class="data-val">+1</span></div>
+        <div class="data-row"><span class="data-key">Nature (INT)</span><span class="data-val">+0</span></div>
+        <div class="data-row"><span class="data-key">Perception (WIS)</span><span class="data-val">+1</span></div>
+        <div class="data-row"><span class="data-key">Performance (CHA)</span><span class="data-val">+4</span></div>
+        <div class="data-row"><span class="data-key">Persuasion (CHA)</span><span class="data-val">+4</span></div>
+        <div class="data-row"><span class="data-key">Religion (INT)</span><span class="data-val">+0</span></div>
+        <div class="data-row"><span class="data-key">Sleight of Hand (DEX) ✓</span><span class="data-val">+5</span></div>
+        <div class="data-row"><span class="data-key">Stealth (DEX)</span><span class="data-val">+2</span></div>
+        <div class="data-row"><span class="data-key">Survival (WIS)</span><span class="data-val">+1</span></div>
+      </div>
+      <div style="font-size:9px; color:var(--ink-muted); margin-top:3px;">✓ proficient · *+10 if DM grants Expertise from double Deception proficiency</div>
+    </div>
+    <div style="margin-top:8px">
+      <div class="section-title">Wild Magic Features</div>
+      <div class="data-row"><span class="data-key">Wild Magic Surge</span><span class="data-val">DM rolls d20; 1 = roll d100 surge table</span></div>
+      <div class="data-row"><span class="data-key">Tides of Chaos</span><span class="data-val">Gain advantage; DM may trigger surge after</span></div>
+      <div class="data-row"><span class="data-key">Bend Luck*</span><span class="data-val">Reaction, 2pts: ±1d4 to any d20 roll</span></div>
+    </div>
+    <div style="margin-top:8px">
+      <div class="section-title">War Caster (Feat)</div>
+      <div class="data-row"><span class="data-key">Concentration saves</span><span class="data-val">Advantage when taking damage</span></div>
+      <div class="data-row"><span class="data-key">Full hands</span><span class="data-val">Cast with Goldmaximus on hand, no penalty</span></div>
+      <div class="data-row"><span class="data-key">Opportunity attacks</span><span class="data-val">Cast spells instead of weapon swings</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Personality</div>
+    <div class="trait-grid">
+      <div class="trait-box" style="grid-column: span 2">
+        <div class="trait-label">Traits</div>
+        <div class="trait-text">I consult Goldmaximus before any significant decision. He has good instincts. Every interaction is a little bit of a show.</div>
+      </div>
+      <div class="trait-box" style="grid-column: span 2">
+        <div class="trait-label">Ideal</div>
+        <div class="trait-text">Understanding. I need to know what happened. Just to know.</div>
+      </div>
+      <div class="trait-box" style="grid-column: span 2">
+        <div class="trait-label">Bond</div>
+        <div class="trait-text">Somewhere there's a theater with my name on a scorched poster.</div>
+      </div>
+      <div class="trait-box" style="grid-column: span 2">
+        <div class="trait-label">Flaw</div>
+        <div class="trait-text">The magic is Goldmaximus's. It is not mine. That's final.</div>
+      </div>
+    </div>
+    <div style="margin-top:8px">
+      <div class="section-title">Equipment</div>
+      <div class="data-row"><span class="data-key">Goldmaximus the Gold</span><span class="data-val">Arcane focus. Yellow sock. Button eyes. Hole in heel.</span></div>
+      <div class="data-row"><span class="data-key">Explorer's pack</span><span class="data-val">Bedroll, rations, rope, torches</span></div>
+      <div class="data-row"><span class="data-key">Two daggers</span><span class="data-val">For emergencies he'd prefer not to have</span></div>
+      <div class="data-row"><span class="data-key">Disguise kit &amp; Forgery kit</span><span class="data-val">Actively in use</span></div>
+      <div class="data-row"><span class="data-key">Component pouch</span><span class="data-val">Backup. Tim hates needing this.</span></div>
+      <div class="data-row"><span class="data-key">Entertainer's props</span><span class="data-val">Juggling gear, cards, collapsible stage</span></div>
+      <div class="data-row"><span class="data-key">Singed flyer</span><span class="data-val">Bottom of pack. Never discussed. "The Great Andrini."</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Row 2: Cantrips + Spells -->
+<div class="body-grid">
+  <div class="section">
+    <div class="section-title">Cantrips (6)</div>
+    <div class="cantrip-row"><span class="cantrip-name">Fire Bolt</span><span class="cantrip-reskin">Goldmaximus breathes through the heel hole. d10+d10, +7, 120ft.</span></div>
+    <div class="cantrip-row"><span class="cantrip-name">Prestidigitation</span><span class="cantrip-reskin">The entire street performance. Goldmaximus takes credit.</span></div>
+    <div class="cantrip-row"><span class="cantrip-name">Minor Illusion</span><span class="cantrip-reskin">The dragon conjures visions of his past glory.</span></div>
+    <div class="cantrip-row"><span class="cantrip-name">Mage Hand</span><span class="cantrip-reskin">The dragon's invisible claw reaches out imperiously.</span></div>
+    <div class="cantrip-row"><span class="cantrip-name">Shocking Grasp</span><span class="cantrip-reskin">Static discharge. Melee +7, 2d8 lightning. Prevents OA. Advantage vs metal armor.</span></div>
+    <div class="cantrip-row"><span class="cantrip-name">Message</span><span class="cantrip-reskin">Goldmaximus delivers the dragon's words directly to minds. Target can whisper back.</span></div>
+  </div>
+
+  <div class="section two-col">
+    <div class="section-title">Spells Known</div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 0 1rem;">
+      <div>
+        <div class="spell-block">
+          <div class="spell-header"><span class="spell-name">Chaos Bolt</span><span class="spell-level">1st · 1 slot</span></div>
+          <div class="spell-meta">Range 120ft · +7 ranged attack · 2d8+1d6 random damage</div>
+          <div class="spell-desc">Random damage type. If d8s match, leaps to new target within 30ft.</div>
+          <div class="spell-reskin">Goldmaximus "tries" to breathe fire. Results vary. He doesn't want to discuss it.</div>
+        </div>
+        <div class="spell-block">
+          <div class="spell-header"><span class="spell-name">Silvery Barbs</span><span class="spell-level">1st · 1 slot · Reaction</span></div>
+          <div class="spell-meta">Range 60ft · No attack/save required</div>
+          <div class="spell-desc">When a creature succeeds on any d20, force a reroll (lower result). Give a different creature advantage on their next d20 before your next turn.</div>
+          <div class="spell-reskin">Tim frantically whispers to Goldmaximus. Fortune shifts. The dragon accepts all gratitude.</div>
+        </div>
+        <div class="spell-block">
+          <div class="spell-header"><span class="spell-name">Misty Step</span><span class="spell-level">2nd · 1 slot · Bonus action</span></div>
+          <div class="spell-meta">Range self · Teleport 30ft to visible space</div>
+          <div class="spell-desc">Teleport up to 30ft to an unoccupied space you can see. No opportunity attacks.</div>
+          <div class="spell-reskin">Tim vanishes. Goldmaximus reappears smugly. Tim is unfortunately attached to the sock.</div>
+        </div>
+      </div>
+      <div>
+        <div class="spell-block">
+          <div class="spell-header"><span class="spell-name">Shatter</span><span class="spell-level">2nd · 1 slot</span></div>
+          <div class="spell-meta">Range 60ft · 10ft radius · CON save DC 15 · 3d8 thunder</div>
+          <div class="spell-desc">3d8 thunder damage (half on save). Inorganic creatures have disadvantage. Works through walls.</div>
+          <div class="spell-reskin">Goldmaximus ROARS. The heel hole vibrates. Everything rattles. He finds this undignified.</div>
+        </div>
+        <div class="spell-block">
+          <div class="spell-header"><span class="spell-name">Fireball</span><span class="spell-level">3rd · 1 slot</span></div>
+          <div class="spell-meta">Range 150ft · 20ft radius · DEX save DC 15 · 8d6 fire (avg 28)</div>
+          <div class="spell-desc">8d6 fire, half on save. Fills from a point, goes around corners. Ignites flammables. Check fighters aren't in range.</div>
+          <div class="spell-reskin">Goldmaximus unleashes his FULL draconic might. This is what he was born for. The theater fire was also him.</div>
+        </div>
+        <div class="spell-block">
+          <div class="spell-header"><span class="spell-name">Hypnotic Pattern</span><span class="spell-level">3rd · 1 slot · Concentration 1 min</span></div>
+          <div class="spell-meta">Range 120ft · 30ft cube · WIS save DC 15</div>
+          <div class="spell-desc">Creatures that fail are incapacitated, speed 0. Ends if they take damage or someone uses an action to shake them. Fight-ender. Protect concentration.</div>
+          <div class="spell-reskin">Goldmaximus emanates ancient draconic presence. Mortals are overwhelmed by his magnificence. He finds this appropriate.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Row 3: Roleplaying + Combat -->
+<div class="body-grid">
+  <div class="section">
+    <div class="section-title">Roleplaying Guide</div>
+    <div class="rp-block">
+      <div class="rp-label">The core fiction</div>
+      <div class="rp-text">The magic belongs to Goldmaximus. Not to Tim. Tim is just nearby when it happens. The theater fire was Goldmaximus. All surges are Goldmaximus. Tim is an innocent bystander who happens to be wearing an ancient dragon on his left hand.</div>
+    </div>
+    <div class="rp-block">
+      <div class="rp-label">Playing the puppet</div>
+      <div class="rp-text">Consult Goldmaximus before significant decisions — hold him up, whisper, nod seriously at the response. Blame him immediately when anything goes wrong. Credit him when anything goes right. He demands to be addressed by full title. When a Wild Magic Surge fires, turn to the puppet first. Let him deny everything.</div>
+    </div>
+    <div class="rp-block">
+      <div class="rp-label">The thing never discussed</div>
+      <div class="rp-text">At the bottom of his pack: a small singed flyer. "The Great Andrini — One Night Only." He kept it when he fled. Goldmaximus knows about it and has the good grace not to bring it up.</div>
+    </div>
+    <div class="rp-block">
+      <div class="rp-label">What others see</div>
+      <div class="rp-text">Some think the puppet is a magic item. Some think he's being silly. Some are genuinely uncertain. Do not resolve this. Let each person form their own read. The ambiguity is the game.</div>
+    </div>
+    <div class="rp-block">
+      <div class="rp-label">His real goal</div>
+      <div class="rp-text">He says he wants a cure. What he actually wants is to understand what happened that night. Some part of him — the performer, the trickster — finds it fascinating even as it terrifies him. He hasn't admitted that yet.</div>
+    </div>
+  </div>
+
+  <div class="section two-col">
+    <div class="section-title">Combat Priority</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap: 0 1rem;">
+      <div>
+        <div class="priority-item">
+          <div class="priority-num">1</div>
+          <div><div class="priority-title">Enemy just succeeded on a roll?</div><div class="priority-desc">Silvery Barbs as a reaction. Force the reroll, give an ally advantage. Costs your reaction and a 1st slot — usually worth it.</div></div>
+        </div>
+        <div class="priority-item">
+          <div class="priority-num">2</div>
+          <div><div class="priority-title">3+ enemies clustered?</div><div class="priority-desc">Fireball. 8d6, DC 15 DEX. Average 28 damage. Confirm fighters are clear — it fills from a point and goes around corners.</div></div>
+        </div>
+        <div class="priority-item">
+          <div class="priority-num">3</div>
+          <div><div class="priority-title">Fight going badly?</div><div class="priority-desc">Hypnotic Pattern. 30ft cube, WIS DC 15, incapacitates on fail. Fight-ender. Requires concentration — stay out of melee.</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="priority-item">
+          <div class="priority-num">4</div>
+          <div><div class="priority-title">Fighter about to swing?</div><div class="priority-desc">Bend Luck (reaction, 2 sorcery pts) adds 1d4 to their roll. Or hold Silvery Barbs for when they miss and use it to force the reroll.</div></div>
+        </div>
+        <div class="priority-item">
+          <div class="priority-num">5</div>
+          <div><div class="priority-title">Single target, conserving slots?</div><div class="priority-desc">Fire Bolt cantrip (+7, 2d10). Or Chaos Bolt (1st slot) for the chance it chains on matching d8s.</div></div>
+        </div>
+        <div class="priority-item">
+          <div class="priority-num">6</div>
+          <div><div class="priority-title">Someone grabbed you?</div><div class="priority-desc">Shocking Grasp (advantage vs metal armor, prevents their OA) then Misty Step bonus action to escape 30ft. War Caster lets you cast Shocking Grasp as an OA too.</div></div>
+        </div>
+        <div style="margin-top:6px; border-top: 0.5px solid var(--border); padding-top:5px;">
+          <div class="priority-title" style="font-size:10px; margin-bottom:3px;">Slot economy</div>
+          <div class="priority-desc">3rd (2): Fireball or Hypnotic Pattern only &nbsp;·&nbsp; 2nd (3): Misty Step or Shatter &nbsp;·&nbsp; 1st (4): Silvery Barbs or Chaos Bolt &nbsp;·&nbsp; Sorcery pts (5): Bend Luck; convert to slots only in emergencies</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DM check-ins -->
+<div class="warn-box">
+  <div class="warn-title">Confirm with DM before session 1</div>
+  <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 1rem;">
+    <div class="warn-item">Bend Luck is a level 6 feature — confirm it's granted at level 5</div>
+    <div class="warn-item">PHB gives 5 cantrips at level 5 — confirm 6 is acceptable</div>
+    <div class="warn-item">Silvery Barbs — some DMs ban it; verify it's allowed</div>
+    <div class="warn-item">Deception from both class and background — confirm if this grants Expertise</div>
+    <div class="warn-item">Goldmaximus the Gold counts as arcane focus</div>
+    <div class="warn-item">*Bend Luck: marked with asterisk above until confirmed</div>
+  </div>
+</div>
+
+<div class="footer">
+  Just Jasper &nbsp;·&nbsp; Tim Anders &nbsp;·&nbsp; The Great Andrini &nbsp;·&nbsp; Wild Magic Sorcerer 5 &nbsp;·&nbsp; Charlatan &nbsp;·&nbsp; Custom Lineage &nbsp;·&nbsp;
+  Goldmaximus the Gold, Ancient Dragon of the Golden Flame, He Who Is Also Quite Gold &nbsp;·&nbsp; is a sock
+</div>
+
+</body>
+</html>
